@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* CSS Variables for easy theming */
+    :root {
+      --bg-color: #1a1a1a;
+      --accent-color: #ffd700;
+      --secondary-bg: #2a2a2a;
+      --text-color: #f4f4f4;
+      --border-width: 30px;
+    }
+
+    /* Global styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #1a1a1a, #333333);
+      color: var(--accent-color);
+      min-height: 100vh;
+      padding: 30px;
+      /* Changed overflow to allow scrolling */
+      overflow-y: auto;
+      position: relative;
+    }
+
+    /* Animated background particles */
+    body::after {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 215, 0, 0.05) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: moveBackground 20s linear infinite;
+      z-index: -2;
+    }
+
+    @keyframes moveBackground {
+      from { transform: translate(0, 0); }
+      to { transform: translate(50px, 50px); }
+    }
+
+    /* Removed body::before border and corner overlays */
+
+    /* Layout container */
+    .container {
+      display: flex;
+      gap: 30px;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: slideIn 1s forwards;
+      position: relative;
+      z-index: 10;
+    }
+
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Profile section styles */
+    .profile-section {
+      flex: 1;
+      max-width: 300px;
+      padding: 20px;
+      animation: slideLeft 1s forwards;
+    }
+
+    @keyframes slideLeft {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0); }
+    }
+
+    .profile-photo {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 5px solid var(--bg-color);
+      outline: 5px solid var(--accent-color);
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      object-fit: cover;
+    }
+
+    .contact-list {
+      list-style: none;
+      padding: 20px;
+      background: var(--secondary-bg);
+      border-radius: 20px;
+      border: 2px solid var(--bg-color);
+      outline: 2px solid var(--accent-color);
+      color: var(--text-color);
+    }
+
+    .contact-list li,
+    .contact-list p {
+      margin: 15px 0;
+      font-size: 0.95rem;
+    }
+
+    .contact-list a {
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .contact-list a:hover {
+      color: #fff;
+    }
+
+    /* Projects section styles */
+    .projects-section {
+      flex: 2;
+      padding: 20px;
+      animation: slideRight 1s forwards;
+    }
+
+    @keyframes slideRight {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+
+    /* Tabs styling */
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .tab-button {
+      background: var(--secondary-bg);
+      color: var(--accent-color);
+      border: 2px solid transparent;
+      outline: 2px solid var(--accent-color);
+      padding: 10px 30px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: all 0.3s ease;
+    }
+
+    .tab-button.active,
+    .tab-button:hover {
+      background: var(--bg-color);
+      border-color: var(--accent-color);
+    }
+
+    .tab-content {
+      display: none;
+      padding: 20px;
+      background: var(--secondary-bg);
+      border-radius: 20px;
+      min-height: 400px;
+      border: 2px solid var(--bg-color);
+      outline: 2px solid var(--accent-color);
+      animation: slideUp 0.5s forwards;
+      color: var(--text-color);
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* External link buttons styled like tab buttons */
+    .link-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+    .link-buttons .tab-button {
+      /* These buttons inherit the .tab-button styles */
+    }
+
+    /* Section labels styling */
+    .section-label {
+      margin-bottom: 10px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: var(--accent-color);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 800px) {
+      .container {
+        flex-direction: column;
+      }
+      .profile-section,
+      .projects-section {
+        max-width: 100%;
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Profile Section -->
+    <section class="profile-section">
+      <img src="https://yt3.googleusercontent.com/X-iVJlkgqnh717fs8fNrop3PKCPYj5UYNqDxecEQx21IpZe6uVGFccA-Fs5J9bRaIqIKAL4NEA=s160-c-k-c0x00ffffff-no-rj" alt="Profile Photo" class="profile-photo">
+      <ul class="contact-list">
+        <p><a href="mailto:imcalledfyre@imcalledfyre.com">Email me</a></p>
+        <li>📍 Lansing, Michigan</li>
+        <li>Welcome to my homepage! Updates coming frequently.</li>
+      </ul>
+    </section>
+
+    <!-- Projects / Tabs Section -->
+    <section class="projects-section">
+      <!-- Top Section Label -->
+      <div class="section-label">Projects</div>
+      <div class="tabs">
+        <button class="tab-button active" onclick="switchTab(event, 'home')">Home</button>
+        <button class="tab-button" onclick="switchTab(event, 'youtube')">YouTube</button>
+        <button class="tab-button" onclick="switchTab(event, 'fyrecraft')">Fyrecraft</button>
+
+        <!-- Extra Tab Buttons (Uncomment any to enable) -->
+        <!-- <button class="tab-button" onclick="switchTab(event, 'extra1')">Extra 1</button> -->
+        <!-- <button class="tab-button" onclick="switchTab(event, 'extra2')">Extra 2</button> -->
+        <!-- <button class="tab-button" onclick="switchTab(event, 'extra3')">Extra 3</button> -->
+      </div>
+      <div id="home" class="tab-content active">
+        <h2>Home Page</h2>
+        <br>
+        <h3>About Me</h3>
+        <p>I'm Finn! A YouTube content creator and the owner of the Minecraft server Fyrecraft. Find me on YouTube at <strong>@imcalledfyre</strong>!</p>
+        <br>
+        <h3>Currently Working On:</h3>
+        <ul>
+          <li>Building a homemade siren with Arduino</li>
+          <li>Updating Fyrecraft</li>
+          <li>Grinding Fortnite</li>
+          <li>Balancing school priorities</li>
+        </ul>
+      </div>
+
+      <div id="youtube" class="tab-content">
+        <h2>YouTube Channel</h2>
+        <p>I create content on siren projects and gaming. Stay tuned for new videos and behind-the-scenes insights.</p>
+      </div>
+
+      <div id="fyrecraft" class="tab-content">
+        <h2>Fyrecraft</h2>
+        <p>An overview of Fyrecraft and how it operates:</p>
+        <br>
+        <h3>Servers</h3>
+        <p>I run Fyrecraft's survival server on a Dell Precision T1700. It’s powered by a standard 1.8.8 Paper server.</p>
+        <h3>Backend</h3>
+        <p>Fyrecraft uses a BungeeCord proxy to route traffic from the Paper server to the Eaglercraft client using Cloudflare Tunnels.</p>
+      </div>
+
+      <!-- Extra Tab Contents (Uncomment any to enable) -->
+      <!--
+      <div id="extra1" class="tab-content">
+        <h2>Extra 1</h2>
+        <p>Content for extra tab 1.</p>
+      </div>
+      -->
+      <!--
+      <div id="extra2" class="tab-content">
+        <h2>Extra 2</h2>
+        <p>Content for extra tab 2.</p>
+      </div>
+      -->
+      <!--
+      <div id="extra3" class="tab-content">
+        <h2>Extra 3</h2>
+        <p>Content for extra tab 3.</p>
+      </div>
+      -->
+
+      <!-- External Link Buttons (Styled like Tab Buttons) -->
+      <!-- Bottom Section Label -->
+      <div class="section-label" style="margin-top: 30px;">Links</div>
+      <div class="link-buttons">
+        <!-- Uncomment the following button to enable Link 1 -->
+        <!-- <button class="tab-button" onclick="window.open('https://example1.com', '_blank')">Link 1</button> -->
+
+        <!-- Uncomment the following button to enable Link 2 -->
+        <button class="tab-button" onclick="window.open('https://alexistheleastsigmapersonever.vonar.ch/fyrecraft.html', '_blank')">Fyrecraft (external site)</button>
+
+        <!-- Uncomment the following button to enable Link 3 -->
+        <button class="tab-button" onclick="window.open('https://discord.com/invite/paSrfFM3qP', '_blank')">Discord</button>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function switchTab(event, tabId) {
+      // Remove active class from all tab contents and buttons
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+
+      // Add active class to the clicked button and its content
+      document.getElementById(tabId).classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+  </script>
+</body>
+</html>
