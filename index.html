@@ -222,6 +222,21 @@
     }
   </style>
 </head>
+<script>
+  function goFullscreen() {
+    const countdown = document.querySelector('.tickcounter');
+    if (countdown.requestFullscreen) {
+      countdown.requestFullscreen();
+    } else if (countdown.webkitRequestFullscreen) {
+      countdown.webkitRequestFullscreen();
+    } else if (countdown.msRequestFullscreen) {
+      countdown.msRequestFullscreen();
+    } else {
+      alert("Your browser is being a crusty lil goblin and doesn't support fullscreen.");
+    }
+  }
+</script>
+
 <body>
   <div class="container">
     <!-- Profile Section -->
@@ -306,10 +321,13 @@
         <!-- <button class="tab-button" onclick="window.open('https://example1.com', '_blank')">Link 1</button> -->
 
         <!-- Uncomment the following button to enable Link 2 -->
-        <button class="tab-button" onclick="window.open('https://alexistheleastsigmapersonever.vonar.ch/fyrecraft.html', '_blank')">Fyrecraft (external site)</button>
+        <!-- <button class="tab-button" onclick="window.open('https://alexistheleastsigmapersonever.vonar.ch/fyrecraft.html', '_blank')">Fyrecraft (external site)</button> -->
 
         <!-- Uncomment the following button to enable Link 3 -->
-        <button class="tab-button" onclick="window.open('https://discord.com/invite/paSrfFM3qP', '_blank')">Discord</button>
+        <button class="tab-button" onclick="window.open('https://discord.com/invite/paSrfFM3qP', '_blank')">Join the FyreFanClub Discord!</button>
+        <script>(function(d, s, id) { var js, pjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//www.tickcounter.com/static/js/loader.js"; pjs.parentNode.insertBefore(js, pjs); }(document, "script", "tickcounter-sdk"));</script><a data-type="countdown" data-id="7342588" class="tickcounter" style="display:block; left:0; width:100%; height:0; position:relative; padding-bottom:25%; margin:0 auto;" title="last day of school" href="//www.tickcounter.com/">last day of school</a>
+        <button class="tab-button" onclick="goFullscreen()">Fullscreen Countdown</button>
+
       </div>
     </section>
   </div>
